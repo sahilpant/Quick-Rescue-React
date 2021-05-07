@@ -1,4 +1,6 @@
 import React from "react";
+import MyForm from "./AddDoc";
+
   
 export const Doctor = () => {
   return (
@@ -11,7 +13,7 @@ export const Doctor = () => {
 export const AddDoc = () => {
   return (
     <div className="doctor">
-      <h1>Form to add doctor</h1>
+      <MyForm />
     </div>
   );
 };
