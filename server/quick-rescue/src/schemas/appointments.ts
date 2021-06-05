@@ -1,12 +1,13 @@
 import * as mongoose from "mongoose";
 
-export const Appoitment = new mongoose.Schema({
-    patientfirstname:{type:String,required:true},
-    patientlastname:{type:String,required:true},
-    patientemailaddress:{type:String,required:true},
+export const Appointment = new mongoose.Schema({
+    userfirstname:{type:String,required:true},
+    userlastname:{type:String,required:true},
+    useremail:{type:String,required:true},
     doctorfirstname:{type:String,required:true},
     doctorlastname:{type:String,required:true},
-    doctoremailaddress:{type:String,required:true},
-    time:{type:Date,required:true},
+    doctoremail:{type:String,required:true},
+    date:{type:String,required:true},
+    time:{type:String,required:true},
     description:{type:String,required:true}
 })

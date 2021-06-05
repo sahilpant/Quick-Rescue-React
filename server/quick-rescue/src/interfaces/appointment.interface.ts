@@ -1,11 +1,12 @@
 import * as mongoose from 'mongoose'
 export interface Appointment extends mongoose.Document{
-    patientfirstname:string,
-    patientlastname:string,
-    patientemailaddress:string,
+    userfirstname:string,
+    userlastname:string,
+    useremail:string,
     doctorfirstname:string,
     doctorlastname:string,
-    doctoremailaddress:string,
+    doctoremail:string,
+    date:string
     time:string    
     description:string
 }

@@ -1,21 +1,21 @@
 import { ApiProperty } from "@nestjs/swagger"
 
-export class DoctorSignUP {
-
+export class UserSignUp {
+    
     @ApiProperty()
     firstname:string
-    
+
     @ApiProperty()
     lastname:string
     
     @ApiProperty()
     email:string
-    
+
     @ApiProperty()
     password:string
 }
 
-export class DoctorSignIn {
+export class UserSignIn {
     
     @ApiProperty()
     email:string

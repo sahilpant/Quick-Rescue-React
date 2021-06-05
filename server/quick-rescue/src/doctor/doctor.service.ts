@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { DoctorSignIn, DoctorSignUP } from 'src/Dtos/doctor.signup.dto';
+import { Appointment } from 'src/interfaces/appointment.interface';
 import { Doctor } from 'src/interfaces/doctor.interface';
 
 @Injectable()
 export class DoctorService {
     constructor(
         @InjectModel('Doctor') private readonly Doctor:Model<Doctor>,
+        @InjectModel('Appointment') private readonly Appointment:Model<Appointment>,
     ) {}
     
     async getAllDoctors():Promise<Doctor[]>{
@@ -15,23 +17,27 @@ export class DoctorService {
         return doctor;
     }
     
-    async signUpDoctor(doctorData:DoctorSignUP):Promise<boolean> {
-        console.log(doctorData.firstname);
+    async signUpDoctor(doctorData:DoctorSignUP):Promise<any> {
         const doctor = new this.Doctor({
             firstname:doctorData.firstname,
             lastname:doctorData.lastname,
             email:doctorData.email,
             password:doctorData.password
         })
-        console.log(doctor);
-        const exist = await this.Doctor.collection.findOne({email: doctorData.email});
+        const exist = await this.Doctor.findOne({email: doctorData.email});
         if(exist) {
             console.log("exist")
-            return false;
+            return {
+                result:false,
+                message:"exist"
+            };
         }
         else {
             await doctor.save();
-            return true;
+            return {
+                result:true,
+                message:"signUp successfull"
+            };
         }
     }
 
@@ -58,6 +64,10 @@ export class DoctorService {
                 message:"email doesnot exist"
             }
         }
+    }
+    async getAppointments(email:string):Promise<any> {
+        const appointments = await this.Appointment.find({doctoremail:email});
+        return appointments;
     }
 
 }
