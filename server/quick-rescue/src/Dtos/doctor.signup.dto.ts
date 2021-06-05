@@ -8,3 +8,10 @@ export class DoctorSignUP {
     
     password:string
 }
+
+export class DoctorSignIn {
+    
+    email:string
+
+    password:string
+}
