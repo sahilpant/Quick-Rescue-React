@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AppointmentDto } from 'src/Dtos/appointment.dto';
-import { UserSignIn, UserSignUp } from 'src/Dtos/User.signup.dto';
+import { UserSignIn, UserSignUp } from 'src/Dtos/user.signup.dto';
 import { Appointment } from 'src/interfaces/appointment.interface';
 import { User } from 'src/interfaces/user.interface';
 
