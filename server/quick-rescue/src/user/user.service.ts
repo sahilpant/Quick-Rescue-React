@@ -19,7 +19,7 @@ export class UserService {
         return user;
     }
 
-    async signUpUser(userData:UserSignUp):Promise<boolean> {
+    async signUpUser(userData:UserSignUp):Promise<any> {
         const user = new this.User({
             firstname:userData.firstname,
             lastname:userData.lastname,
@@ -29,11 +29,17 @@ export class UserService {
         const exist = await this.User.findOne({email: userData.email});
         if(exist) {
             console.log("exist")
-            return false;
+            return {
+                result:false,
+                message:"Accont already exist"
+            }
         }
         else {
             await user.save();
-            return true;
+            return {
+                result:true,
+                message:"signUp successfull"
+            }
         }
     }
 
@@ -85,12 +91,14 @@ export class UserService {
         try{
             await appointment.save();
             return {
-                result:true
+                result:true,
+                message:"appointment booked"
             }
         }catch(e){
             console.log(e);
             return {
-                result:false
+                result:false,
+                message:"appointment not booked"
             }
         }
     }
