@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DoctorSignIn, DoctorSignUP } from 'src/Dtos/doctor.signup.dto';
 import { Doctor } from 'src/interfaces/doctor.interface';
@@ -34,7 +34,7 @@ export class DoctorController {
     @ApiResponse({status:200})
     @ApiTags("Doctors Apis")
     @Get('doctor/appointment')
-    async getUserAppointment(@Body() email:string):Promise<any> {
+    async getUserAppointment(@Query('email') email:string):Promise<any> {
         return this.DoctorService.getAppointments(email);
     }
 }

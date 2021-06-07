@@ -4,10 +4,11 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
 
   const config = new DocumentBuilder()
   .setTitle('Quick Rescue API Documentation')
-  .setDescription('All the backedn get and post apis')
+  .setDescription('All the backend get and post apis')
   .setVersion('1.0')
   .build();
 
