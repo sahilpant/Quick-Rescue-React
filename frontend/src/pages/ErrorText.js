@@ -1,3 +1,4 @@
+import React from 'react';
 export default function ErrorText(props) {
     if (!props.errText) {
       return null;

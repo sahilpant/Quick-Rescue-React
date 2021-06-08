@@ -1,53 +1,99 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default class SignUp extends Component {
-    render() {
-        return (
-            <div className="text" 
-            style={{
-                position:"absolute",
-                top:"20%",
-                backgroundColor:"#dee",
-                padding:"10px",
-                borderRadius:"5",
-                height:"70vh",
-                width:"100vh",
-                marginLeft:"25%"
+  state ={
+      firstname : "",
+      lastname : "",
+      email : "",
+      password : ""
+  };
 
-            }}>
-            <form>
+  handleSign = (e) => {
+      e.preventDefault();
+      
+      axios.post('http://15.206.91.32:3000/doctor/doctor/signup', {
+        firstname : this.state.firstname,
+        lastname : this.state.lastname,
+        email : this.state.email,
+        password: this.state.password
 
-                <div className="form-group">
-                    <label>First name</label>
-                    <input type="text" className="form-control" placeholder="First name" />
-                </div>
-                <br/>
+      })
+      .then(res => {
+          window.alert(`${res.data.message}`)
+      })
+      .catch(err => {
+          console.log(err)
+      })
+      
+  }
 
-                <div className="form-group">
-                    <label>Last name</label>
-                    <input type="text" className="form-control" placeholder="Last name" />
-                </div>
-                <br/>
+  handleChange = (e) => {
+    this.setState({
+        [e.target.name] : e.target.value
+    });
+  }
 
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
-                <br/>
+render() {
+    const {firstname, lastname, email, password } = this.setState
+    return (
+        <div className="text" 
+        style={{
+            position:"absolute",
+            top:"20%",
+            backgroundColor:"#dee",
+            padding:"10px",
+            borderRadius:"5",
+            height:"70vh",
+            width:"100vh",
+            marginLeft:"25%"
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
-                <br/>
+        }}>
+        <form onSubmit = {this.handleSign} >
 
-                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
-                <br/><br/><br/><p className="forgot-password text-right">
-                    Already registered <Link to="/Login">sign in?</Link>
-                </p>
-            </form>
-            </div>
-        );
-    }
+        <div className="form-group">
+            <label>First name</label>
+            <input type="text" className="form-control" placeholder="First name" 
+            name = 'firstname'
+            value = {firstname}
+            onChange = {this.handleChange} />
+        </div>
+        <br/>
+
+        <div className="form-group">
+            <label>Last name</label>
+            <input type="text" className="form-control" placeholder="Last name" 
+                name ='lastname'
+                value = {lastname}
+                onChange = {this.handleChange} />
+        </div>
+        <br/>
+
+        <div className="form-group">
+            <label>Email address</label>
+            <input type="email" className="form-control" placeholder="Enter email"
+                name= 'email'
+                value = {email}
+                onChange = {this.handleChange} />
+        </div>
+        <br/>
+
+        <div className="form-group">
+            <label>Password</label>
+            <input type="password" className="form-control" placeholder="Enter password"
+                name = 'password'
+                value = {password}
+                onChange = {this.handleChange} />
+        </div>
+        <br/>
+
+        <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+        <br/><br/><br/><p className="forgot-password text-right">
+            Already registered <Link to="/Login">sign in?</Link>
+        </p>
+    </form>
+    </div>
+    );
+}
 }

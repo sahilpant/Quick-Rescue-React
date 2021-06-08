@@ -1,48 +1,37 @@
 import React from 'react';
+import axios from 'axios';
 import { PropTypes } from 'prop-types';
-import ErrorText from './ErrorText';
+//import ErrorText from './ErrorText';
 import './styles.css';
 import {Link} from 'react-router-dom';
 
-class LoginForm extends React.Component {
+class LoginForm extends React.Component{
   constructor(props, context) {
     super(props, context);
     this.state = {
       Username: '',
       Password: '',
-      remember: false,
-      error: {}
     };
-
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleLogin() {
-    this.setState({
-      error: {}
-    });
-
-    const { Username, Password, isRemember } = this.state;
-
-    return this.props.onSubmit(Username, Password, isRemember);
+  handleLogin = (e) => {
+    axios.post('http://15.206.91.32:3000/doctor/doctor/signup',this.state).then( res =>{
+      console.log(res)
+    })
+     .catch(err => {
+       console.log(err)
+     })
   }
 
 
-  handleChange(name, e) {
+  handleChange = (e) => {
     this.setState({
-      [name]: e.target.value
-    });
-  }
-
-  handleCheck() {
-    this.setState({
-      remember: !this.state.remember
+      [e.target.name]: e.target.value
     });
   }
 
   render() {
+    
     let usernameOptions = {
       maxLength: 40,
       placeholder: 'Email',
@@ -62,7 +51,6 @@ class LoginForm extends React.Component {
     };
 
     let i18n = {
-      rememberMe: 'Remember Me',
       submitLabel: 'Sign In'
     };
 
@@ -95,17 +83,18 @@ class LoginForm extends React.Component {
         marginLeft:"25%"
 
     }}>
-      <form action="javascript:void(0)" noValidate onSubmit={this.handleLogin} className={formOptions.className}>
+      <form action="javascript:void(0)" noValidate onSubmit={ this.handleLogin} className={formOptions.className}>
         <div className={usernameOptions.containerClassName}>
           <input
             maxLength={usernameOptions.maxLength}
             placeholder={usernameOptions.placeholder}
             autoComplete="off"
+            name='Username'
             className={usernameOptions.className}
-            onChange={e => this.handleChange('Username', e)}
+            onChange={this.handleChange}
             type={usernameOptions.type}
           />
-          <ErrorText errText={this.state.error.email} />
+          
           <span className="glyphicon glyphicon-envelope " />
         </div>
         <div className={passwordOptions.containerClassName}>
@@ -114,11 +103,11 @@ class LoginForm extends React.Component {
             className={passwordOptions.className}
             maxLength={40}
             name="Password"
-            onChange={e => this.handleChange('Password', e)}
+            onChange={this.handleChange}
             placeholder={passwordOptions.placeholder}
             type="password"
           />
-          <ErrorText errText={this.state.error.password} />
+          
           <span className="glyphicon glyphicon-lock" />
         </div>
         <div style={{
@@ -127,24 +116,10 @@ class LoginForm extends React.Component {
             marginLeft: -15
           }}
         >
-          <div className="remember-container">
-            <div>
-              <label htmlFor="remember">
-                <input
-                  id="remember"
-                  checked={this.state.remember}
-                  onChange={this.handleCheck}
-                  type="checkbox"
-                /> {i18n.rememberMe}
-              </label>
-            </div>
-          </div>
           <div className="button-container">
+          <Link to="/List">
             <button type="submit" className="btnSubmit">{i18n.submitLabel}</button>
-            <br/>
-            <p>
-            Forgot <a href="#">password?</a>
-            </p>
+          </Link> 
           </div>
         </div>
         <div className='btn-signup'>
