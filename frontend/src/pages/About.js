@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Navbar from './Navbar';
+
 const GridWrapper = styled.div`
   display: grid;
   grid-gap: 10px;
@@ -30,4 +32,5 @@ export const About = () => (
       <p>Meow meow, I tell my human purr for no reason but to chase after</p>
     </div>
   </GridWrapper>
+  
 )
