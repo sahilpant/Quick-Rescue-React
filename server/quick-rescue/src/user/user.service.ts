@@ -46,13 +46,12 @@ export class UserService {
     async signInUser(signInData:UserSignIn):Promise<any>{
         const {email,password} = signInData;
         const user = await this.User.findOne({email:email});
-        console.log(user);
         if(user){
             if(user.password == password){
                 return {
                     result:true,
                     message:"successfull login",
-                    details: user
+                    deta: user
                 }
             }
             else{

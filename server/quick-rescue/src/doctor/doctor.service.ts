@@ -48,7 +48,8 @@ export class DoctorService {
             if(doctor.password == password){
                 return {
                     result:true,
-                    message:"successfull login"
+                    message:"successfull login",
+                    data:doctor
                 }
             }
             else{
