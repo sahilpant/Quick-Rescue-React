@@ -7,13 +7,13 @@ const PLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
-      .post("http://15.206.91.32:3000/userser/user/signin", {
+      .post("http://65.2.73.180:3000/userser/user/signin", {
         email: e.target.email.value,
         password: e.target.password.value,
       })
       .then((res) => {
-        console.log(res.data)
-        // localStorage.setItem("login", JSON.stringify(res.data))
+        // console.log(res.data)
+        localStorage.setItem("login", JSON.stringify(res.data.deta))
         if (res.data.result) {
           // history.push("/board")
           window.location.href = "/board"
@@ -29,7 +29,7 @@ const PLogin = () => {
   return (
     <div className='wrapper'>
       <form className='login' noValidate onSubmit={handleSubmit}>
-        <p className='title'>Log in</p>
+        <p className='title'>User Log in</p>
         <input
           type='text'
           placeholder='Email'

@@ -23,7 +23,7 @@ class List extends React.Component {
 
   getUsers = () => {
     axios
-      .get("http://15.206.91.32:3000/doctor/doctor/get")
+      .get("http://65.2.73.180:3000/doctor/doctor/get")
       .then((response) => {
         const data = response.data
         this.setState({ users: data })

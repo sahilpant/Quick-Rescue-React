@@ -7,12 +7,12 @@ const DLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios
-      .post("http://15.206.91.32:3000/doctor/doctor/signin", {
+      .post("http://65.2.73.180:3000/doctor/doctor/signin", {
         email: e.target.email.value,
         password: e.target.password.value,
       })
       .then((res) => {
-        localStorage.setItem("login", res.data)
+        localStorage.setItem("login", JSON.stringify(res.data.data))
         if (res.data.result) {
           // history.push("/Dboard")
           window.location.href = "/Dboard"
@@ -28,7 +28,7 @@ const DLogin = () => {
   return (
     <div className='wrapper'>
       <form className='login' noValidate onSubmit={handleSubmit}>
-        <p className='title'>Log in</p>
+        <p className='title'>Doctor Log in</p>
         <input
           type='text'
           placeholder='Email'

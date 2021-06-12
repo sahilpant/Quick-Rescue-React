@@ -24,8 +24,12 @@ const Ddashboard = () => {
   const [appointmentsLoading, setAppointmentLoading] = useState(false)
   const [appointments, setAppointment] = useState([])
   const [appointmentsError, setAppointmentError] = useState()
+  const [textBox, setTextbox] = useState()
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    setTextbox(JSON.parse(localStorage.getItem("login")).email)
+    // console.log()
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -33,7 +37,7 @@ const Ddashboard = () => {
     setAppointment([])
     setAppointmentError()
     axios
-      .get("http://15.206.91.32:3000/doctor/doctor/appointment", {
+      .get("http://65.2.73.180:3000/doctor/doctor/appointment", {
         params: {
           email: e.target.email.value,
         },
@@ -61,6 +65,7 @@ const Ddashboard = () => {
             size='small'
             label='Enter Email'
             name='email'
+            value={textBox}
             required
             InputProps={{
               startAdornment: (
@@ -119,9 +124,9 @@ const Ddashboard = () => {
                     variant='contained'
                     color='primary'
                     //component={Link}
-                    to={{
-                      pathname: "#",
-                    }}>
+                    onClick={() =>
+                      (window.location.href = "http://localhost:3000/")
+                    }>
                     <VideoCallIcon />
                   </Button>
                 </TableCell>
@@ -156,7 +161,7 @@ export default Ddashboard
 
 //     handle = (e) => {
 //         e.preventDefault();
-//         axios.get('http://15.206.91.32:3000/doctor/doctor/appointment',{params:{
+//         axios.get('http://65.2.73.180:3000/doctor/doctor/appointment',{params:{
 //         email: this.state.email,
 //         }
 //     }).

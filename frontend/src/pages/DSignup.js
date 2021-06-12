@@ -15,7 +15,7 @@ const DSignup = () => {
   const hanldeSubmit = (e) => {
     e.preventDefault()
     axios
-      .post("http://15.206.91.32:3000/doctor/doctor/signup", {
+      .post("http://65.2.73.180:3000/doctor/doctor/signup", {
         firstname: e.target.firstname.value,
         lastname: e.target.lastname.value,
         email: e.target.email.value,

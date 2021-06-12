@@ -1,6 +1,9 @@
-import axios from 'axios';
+import axios from "axios"
 
-axios.get('http://15.206.91.32:3000/userser/user/appointment',{params:{
-    email:'sahilpant16@gmail.com'
-}
-}).then(x=>console.log(x.data))
+axios
+  .get("http://65.2.73.180:3000/userser/user/appointment", {
+    params: {
+      email: "sahilpant16@gmail.com",
+    },
+  })
+  .then((x) => console.log(x.data))

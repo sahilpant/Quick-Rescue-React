@@ -25,7 +25,7 @@ const Appointment = () => {
     }
 
     axios
-      .post("http://15.206.91.32:3000/userser/User/bookAppointment", {
+      .post("http://65.2.73.180:3000/userser/User/bookAppointment", {
         ...user,
       })
       .then((res) => {
