@@ -1,83 +1,124 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import {
+  Button,
+  Card,
+  CardContent,
+  TextField,
+  Typography,
+} from "@material-ui/core"
+import { Container } from "@material-ui/core"
+import axios from "axios"
+import React from "react"
+import { Link, useHistory } from "react-router-dom"
 
-export default class DSignUp extends Component {
-  state ={
-      firstname : "",
-      lastname : "",
-      email : "",
-      password : ""
-  };
-
-  handleSign = (e) => {
-      e.preventDefault();
-      
-      axios.post('http://15.206.91.32:3000/doctor/doctor/signup', {
-        firstname : this.state.firstname,
-        lastname : this.state.lastname,
-        email : this.state.email,
-        password: this.state.password
-
+const DSignup = () => {
+  const history = useHistory()
+  const hanldeSubmit = (e) => {
+    e.preventDefault()
+    axios
+      .post("http://15.206.91.32:3000/doctor/doctor/signup", {
+        firstname: e.target.firstname.value,
+        lastname: e.target.lastname.value,
+        email: e.target.email.value,
+        password: e.target.password.value,
+        speciality: e.target.speciality.value,
       })
-      .then(res => {
-          window.alert(`${res.data.message}`)
+      .then((res) => {
+        window.alert(`${res.data.message}`)
+        history.push("/DLogin")
       })
-      .catch(err => {
-          console.log(err)
+      .catch((err) => {
+        console.log(err)
       })
-      
   }
-
-  handleChange = (e) => {
-    this.setState({
-        [e.target.name] : e.target.value
-    });
-  }
-
-render() {
-    const {firstname, lastname, email, password } = this.setState
-    return (
-      
-        <div className="wrapper">
-        <form className="login" noValidate onSubmit={ this.handleSign}>
-          <p className="title">Sign Up</p>
-          <input
-           type="text"
-           placeholder="First Name" autofocus required
-           autoComplete="off"
-           name='firstname'
-           value = {firstname}
-           onChange={this.handleChange} />
-           <input
-           type="text"
-           placeholder="Last Name" autofocus required
-           autoComplete="off"
-           name='lastname'
-           value = {lastname}
-           onChange={this.handleChange} />
-           <input
-           type="email"
-           placeholder="Email" autofocus required
-           autoComplete="off"
-           name='email'
-           value = {email}
-           onChange={this.handleChange} />
-          <input 
-          type="password" 
-          placeholder="Password" required 
-          autoComplete="off"
-          name="password"
-          value={password}
-          onChange={this.handleChange}/>
-          <button type='submit' >
-            <i className="spinner" />
-            <span className="state">Sign up</span>
-          </button>
-        </form>
-        <footer>Already user? <Link to ="/DLogin">Sign in</Link></footer>
-        <p />
-      </div>
-    );
+  return (
+    <Container
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: "3rem",
+      }}>
+      <Card style={{ maxWidth: "20rem" }}>
+        <CardContent style={{ display: "flex", flexDirection: "column" }}>
+          <form noValidate onSubmit={hanldeSubmit}>
+            <Typography
+              variant='h5'
+              gutterBottom
+              style={{ color: "#000", marginBottom: "1rem" }}>
+              Sign Up
+            </Typography>
+            <TextField
+              style={{ marginBottom: "1rem" }}
+              variant='outlined'
+              size='small'
+              placeholder='First Name'
+              required
+              fullWidth
+              autoComplete='off'
+              label='First Name'
+              name='firstname'
+            />
+            <TextField
+              style={{ marginBottom: "1rem" }}
+              variant='outlined'
+              size='small'
+              placeholder='Last Name'
+              required
+              fullWidth
+              autoComplete='off'
+              label='Last Name'
+              name='lastname'
+            />
+            <TextField
+              variant='outlined'
+              size='small'
+              type='email'
+              placeholder='Email'
+              required
+              fullWidth
+              autoComplete='off'
+              label='Email'
+              name='email'
+              style={{ marginBottom: "1rem" }}
+            />
+            <TextField
+              variant='outlined'
+              style={{ marginBottom: "1rem" }}
+              size='small'
+              type='password'
+              placeholder='Password'
+              required
+              fullWidth
+              label='Password'
+              name='password'
+            />
+            <TextField
+              variant='outlined'
+              size='small'
+              type='text'
+              placeholder='Speciality'
+              required
+              fullWidth
+              name='speciality'
+              label='Speciality'
+              style={{ marginBottom: "1rem" }}
+            />
+            <Button type='submit' variant='contained' color='primary' fullWidth>
+              Sign up
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+      <Typography
+        variant='h6'
+        gutterBottom
+        style={{ color: "#000", marginTop: "1rem" }}>
+        Already user? <Link to='/DLogin'>Sign in</Link>
+      </Typography>
+      <p />
+    </Container>
+  )
 }
-}
+
+export default DSignup

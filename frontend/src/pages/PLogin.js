@@ -12,9 +12,11 @@ const PLogin = () => {
         password: e.target.password.value,
       })
       .then((res) => {
-        localStorage.setItem("login", res.data.result)
+        console.log(res.data)
+        // localStorage.setItem("login", JSON.stringify(res.data))
         if (res.data.result) {
-          history.push("/board")
+          // history.push("/board")
+          window.location.href = "/board"
         } else {
           alert("Wrong User Input")
         }

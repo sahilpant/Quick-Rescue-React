@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const classes = useStyles()
   const [userLogin, setUserLogin] = useState(false)
+  const history = useHistory()
 
   useEffect(() => {
     setUserLogin(localStorage.getItem("login"))
@@ -41,7 +42,7 @@ export default function Navbar() {
             to='/about'>
             About
           </Typography>
-           {/*!userLogin && (*/
+          {!userLogin && (
             <>
               <Typography
                 variant='h6'
@@ -58,10 +59,13 @@ export default function Navbar() {
                 User Login
               </Typography>
             </>
-          }
+          )}
           <Button
             color='inherit'
-            onClick={() => localStorage.removeItem("login")}>
+            onClick={() => {
+              localStorage.removeItem("login")
+              window.location.href = "/about"
+            }}>
             {userLogin && "Logout"}
           </Button>
         </Toolbar>
