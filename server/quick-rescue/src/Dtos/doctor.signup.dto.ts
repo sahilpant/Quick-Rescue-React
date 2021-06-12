@@ -7,6 +7,9 @@ export class DoctorSignUP {
     
     @ApiProperty()
     lastname:string
+
+    @ApiProperty()
+    speciality:string
     
     @ApiProperty()
     email:string

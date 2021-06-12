@@ -21,6 +21,7 @@ export class DoctorService {
         const doctor = new this.Doctor({
             firstname:doctorData.firstname,
             lastname:doctorData.lastname,
+            speciality:doctorData.speciality,
             email:doctorData.email,
             password:doctorData.password
         })
