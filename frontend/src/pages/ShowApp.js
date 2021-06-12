@@ -18,7 +18,7 @@ import {
   } from "@material-ui/core"
 
 
-export default class Dboard extends React.Component{
+export default class PShowApp extends React.Component{
   state={
     email:'',
     user:[],
@@ -38,7 +38,7 @@ export default class Dboard extends React.Component{
 
     handle = (e) => {
         e.preventDefault();
-        axios.get('http://15.206.91.32:3000/doctor/doctor/appointment',{params:{
+        axios.get('http://15.206.91.32:3000/userser/user/appointment',{params:{
         email: this.state.email,
         }
     }).
@@ -102,9 +102,9 @@ export default class Dboard extends React.Component{
           {this.state.user.map((post ,index) => (
             <TableRow key={index}>
               <TableCell align='left'>
-                {post.userfirstname} {post.userlastname}
+                {post.doctorfirstname} {post.doctorlastname}
               </TableCell>
-              <TableCell align='left'>{post.useremail}</TableCell>
+              <TableCell align='left'>{post.doctoremail}</TableCell>
               <TableCell align='left'>{post.date}</TableCell>
               <TableCell align='left'>{post.time}</TableCell>
               <TableCell align='left'>

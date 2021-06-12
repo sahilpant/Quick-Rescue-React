@@ -1,44 +1,71 @@
-import React from 'react';
-import {
-Nav,
-NavLink,
-Bars,
-NavMenu,
+import React, { useEffect, useState } from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import Button from "@material-ui/core/Button"
+import IconButton from "@material-ui/core/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import { Link } from "react-router-dom"
 
-} from './NavbarElements';
-import axios from 'axios';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    textDecoration: "none",
+    color: "#fff",
+  },
+}))
 
+export default function Navbar() {
+  const classes = useStyles()
+  const [userLogin, setUserLogin] = useState(false)
 
-class Navbar extends React.Component{
-	render(){
-   return (
-	<>
-	<Nav>
-		<Bars />
-		<NavMenu>
-			<NavLink to='/about' activeStyle>
-				About
-			</NavLink>
-			<NavLink to='/DLogin' activeStyle>
-				Doctor Login
-			</NavLink>
-			<NavLink to='/PLogin' activeStyle>
-				User Login
-			</NavLink>
-			{/* Second Nav */}
-			{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
-		</NavMenu>
-		<h1 style={{
-			fontSize:'40px',
-			 color:'white',
-			 alignItems : 'center',
-			 display:"flex",
-			 paddingLeft:'400px'
-			 }}>Quick Rescue</h1>
-	   </Nav>
-	</>
-);
+  useEffect(() => {
+    setUserLogin(localStorage.getItem("login"))
+  }, [])
+
+  return (
+    <div className={classes.root}>
+      <AppBar position='static'>
+        <Toolbar>
+          <Typography
+            variant='h6'
+            className={classes.title}
+            component={Link}
+            to='/about'>
+            About
+          </Typography>
+           {/*!userLogin && (*/
+            <>
+              <Typography
+                variant='h6'
+                className={classes.title}
+                component={Link}
+                to='/DLogin'>
+                Doctor Login
+              </Typography>
+              <Typography
+                variant='h6'
+                className={classes.title}
+                component={Link}
+                to='/PLogin'>
+                User Login
+              </Typography>
+            </>
+          }
+          <Button
+            color='inherit'
+            onClick={() => localStorage.removeItem("login")}>
+            {userLogin && "Logout"}
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  )
 }
-}
-
-export default Navbar;

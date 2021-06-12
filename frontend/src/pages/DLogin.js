@@ -1,64 +1,63 @@
-import React,{ useEffect } from 'react';
-import { Link ,Redirect, useHistory} from 'react-router-dom';
-import './login.css';
-import axios from 'axios';
-
-class DLoginForm extends React.Component{
-  state ={
-    email : "",
-    password : ""
-};
+import axios from "axios"
+import React from "react"
+import { Link, useHistory } from "react-router-dom"
 
 
-  handleLogin = (e) => {
-    e.preventDefault();
-    axios.post('http://15.206.91.32:3000/doctor/doctor/signin',{
-        email : this.state.email,
-        password: this.state.password
-
-    }).then( res =>{
-      console.log(res)
-    })
-     .catch(err => {
-       console.log(err)
-     })
+const DLogin = () => {
+  const history = useHistory()
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios
+      .post("http://15.206.91.32:3000/doctor/doctor/signin", {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      })
+      .then((res) => {
+        localStorage.setItem("login", res.data.result)
+        if (res.data.result) {
+          history.push("/Dboard")
+        } else {
+          alert("Wrong User Input")
+        }
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
-
-
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-  render() {
     return (
-      <div className="wrapper">
-        <form className="login" noValidate onSubmit={ this.handleLogin}>
-          <p className="title">Log in</p>
+      <div className='wrapper'>
+        <form className='login' noValidate onSubmit={handleSubmit}>
+          <p className='title'>Log in</p>
           <input
-           type="text"
-           placeholder="Email" autofocus required
-           autoComplete="off"
-           name='email'
-           onChange={this.handleChange} />
-          <i className="fa fa-user" />
-          <input 
-          type="password" 
-          placeholder="Password" required 
-          autoComplete="off"
-          name="password"
-          onChange={this.handleChange}/>
-          <i className="fa fa-key" />
-          <button type='submit' >
-            <i className="spinner" />
-            <span className="state">Log in</span>
+            type='text'
+            placeholder='Email'
+            autofocus
+            required
+            autoComplete='off'
+            name='email'
+          />
+          <i className='fa fa-user' />
+          <input
+            type='password'
+            placeholder='Password'
+            required
+            autoComplete='off'
+            name='password'
+          />
+          <i className='fa fa-key' />
+          <button type='submit'>
+            <i className='spinner' />
+            <span className='state'>Log in</span>
           </button>
         </form>
-        <footer>New User? <Link to ="/DSignup">Signup</Link></footer>
+        <footer>
+          New User? <Link to='/DSignup'>Signup</Link>
+        </footer>
         <p />
       </div>
     );
-  }
 }
 
-export default DLoginForm;
+
+export default DLogin
