@@ -11,7 +11,7 @@ import "./App.css"
 import { CronJob } from 'cron';
 
 
-const socket = io.connect('http://localhost:5000')
+const socket = io.connect('https://quickrescue-backend-video-call.herokuapp.com/')
 function App() {
 	const [ me, setMe ] = useState("")
 	const [ stream, setStream ] = useState()
