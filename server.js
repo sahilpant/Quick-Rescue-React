@@ -11,6 +11,10 @@ const io = require("socket.io")(server, {
 	}
 })
 
+app.get('/',(req,res) => {
+	res.send("hello");
+})
+
 const job = new CronJob(
 	'*/5 * * * *',
 	async () => {
