@@ -10,6 +10,17 @@ const io = require("socket.io")(server, {
 	}
 })
 
+const job = new CronJob(
+	'*/5 * * * *',
+	async () => {
+		console.log("");
+	},
+	undefined,
+	true,
+	'Asia/Kolkata',
+  );
+  job.start();
+
 const users = {}
 
 io.on("connection", (socket) => {
