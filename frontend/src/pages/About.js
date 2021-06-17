@@ -26,11 +26,13 @@ export const About = () => (
         marginLeft:"20%"
 
       }}>
-      <h2>About Page</h2>
-      <p>State at ceiling lay on arms while you're using the keyboard so this human feeds me.</p>
-      <p>I am a kitty cat, sup, feed me, no cares in the world</p>
-      <p>Meow meow, I tell my human purr for no reason but to chase after</p>
+      <h1>Quick Rescue</h1>
+      <p>Our application, Quick Rescue, will assist a patient with tracking down a specific specialist according to their necessities, accessibility, distance, and consultancy charges.</p>
+      <p>It is planned particularly for a crisis and decrease the patient's time in chasing for a specific specialist</p>
+      <p>This model raises the inclusion of little emergency clinics into the online framework to upgrade clinical benefits. </p>
     </div>
   </GridWrapper>
   
 )
+
+ 

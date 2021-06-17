@@ -52,6 +52,9 @@ class List extends React.Component {
               <TableCell align='left'>
                 <strong>Email</strong>
               </TableCell>
+              <TableCell align='left'>
+                <strong>Speciality</strong>
+              </TableCell>
               <TableCell align='left'></TableCell>
             </TableRow>
           </TableHead>
@@ -62,6 +65,7 @@ class List extends React.Component {
                 {post.firstname} {post.lastname}
               </TableCell>
               <TableCell align='left'>{post.email}</TableCell>
+              <TableCell align='left'>{post.speciality}</TableCell>
               <TableCell align='left'>
                 <Button
                   variant='contained'
